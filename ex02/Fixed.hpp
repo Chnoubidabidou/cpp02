@@ -6,14 +6,14 @@
 /*   By: lgrisel <lgrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 14:48:15 by lgrisel           #+#    #+#             */
-/*   Updated: 2025/07/08 14:56:44 by lgrisel          ###   ########.fr       */
+/*   Updated: 2025/08/05 12:09:03 by lgrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-# include <iostream>
-# include <cmath>
+#include <iostream>
+#include <cmath>
 
 class	Fixed
 {
