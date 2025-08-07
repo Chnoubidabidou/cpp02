@@ -6,7 +6,7 @@
 /*   By: lgrisel <lgrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 14:48:15 by lgrisel           #+#    #+#             */
-/*   Updated: 2025/08/05 12:09:03 by lgrisel          ###   ########.fr       */
+/*   Updated: 2025/08/07 11:49:26 by lgrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,34 +18,34 @@
 class	Fixed
 {
 	private:
-		int					value;
+		int					raw_bit;
 		static const int	fraction = 8;
 
 		public:
 		Fixed();
-		Fixed(const int value);
-		Fixed(const float value);
+		Fixed(const int raw_bit);
+		Fixed(const float raw_bit);
 		~Fixed();
 		Fixed(Fixed const &copy);
 		
 		Fixed	&operator=(Fixed const &copy);
 
-		Fixed	operator+(Fixed const &copy) const;
-		Fixed	operator-(Fixed const &copy) const;
-		Fixed	operator*(Fixed const &copy) const;
-		Fixed	operator/(Fixed const &copy) const;
+		Fixed	operator+(Fixed const &fixed) const;
+		Fixed	operator-(Fixed const &fixed) const;
+		Fixed	operator*(Fixed const &fixed) const;
+		Fixed	operator/(Fixed const &fixed) const;
 
-		bool	operator==(Fixed const &copy) const;
-		bool	operator!=(Fixed const &copy) const;
-		bool	operator<=(Fixed const &copy) const;
-		bool	operator>=(Fixed const &copy) const;
-		bool	operator<(Fixed const &copy) const;
-		bool	operator>(Fixed const &copy) const;
+		bool	operator==(Fixed const &fixed) const;
+		bool	operator!=(Fixed const &fixed) const;
+		bool	operator<=(Fixed const &fixed) const;
+		bool	operator>=(Fixed const &fixed) const;
+		bool	operator<(Fixed const &fixed) const;
+		bool	operator>(Fixed const &fixed) const;
 		
 		Fixed	&operator++(void);
-		Fixed	operator++(int value);
+		Fixed	operator++(int raw_bit);
 		Fixed	&operator--(void);
-		Fixed	operator--(int value);
+		Fixed	operator--(int raw_bit);
 		
 		static Fixed		&min(Fixed &a, Fixed &b);
 		static const Fixed	&min(const Fixed &a, const Fixed &b);
@@ -58,4 +58,4 @@ class	Fixed
 		int		toInt(void) const;
 };
 
-std::ostream	&operator<<(std::ostream &str, Fixed const &fixed_nbr);
+std::ostream	&operator<<(std::ostream &stream, Fixed const &fixed_nbr);

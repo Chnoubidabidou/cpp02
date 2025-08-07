@@ -6,24 +6,24 @@
 /*   By: lgrisel <lgrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 14:48:14 by lgrisel           #+#    #+#             */
-/*   Updated: 2025/08/07 11:28:09 by lgrisel          ###   ########.fr       */
+/*   Updated: 2025/08/07 11:47:26 by lgrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
-Fixed::Fixed(): value(0)
+Fixed::Fixed(): raw_bit(0)
 {
 }
 
 Fixed::Fixed(const int input)
 {
-	this->value = input << Fixed::fraction;
+	this->raw_bit = input << Fixed::fraction;
 }
 
 Fixed::Fixed(const float input)
 {
-	this->value = roundf(input * float(1 << Fixed::fraction));
+	this->raw_bit = roundf(input * float(1 << Fixed::fraction));
 }
 
 Fixed::Fixed(const Fixed &copy)
@@ -38,7 +38,7 @@ Fixed::~Fixed()
 Fixed &Fixed::operator=(const Fixed &src)
 {
 	if (this != &src)
-		this->value = src.getRawBits();
+		this->raw_bit = src.getRawBits();
 	return (*this);
 }
 
@@ -52,7 +52,7 @@ Fixed	Fixed::operator+(Fixed const &fixed) const
 {
 	Fixed	res;
 
-	res.value = this->value + fixed.value;
+	res.raw_bit = this->raw_bit + fixed.raw_bit;
 	return (res);
 }
 
@@ -60,7 +60,7 @@ Fixed	Fixed::operator-(Fixed const &fixed) const
 {
 	Fixed	res;
 
-	res.value = this->value - fixed.value;
+	res.raw_bit = this->raw_bit - fixed.raw_bit;
 	return (res);
 }
 
@@ -68,8 +68,7 @@ Fixed	Fixed::operator*(Fixed const &fixed) const
 {
 	Fixed	res;
 
-	res.value = (long(this->value)
-		* long(fixed.value)) >> Fixed::fraction;
+	res.raw_bit = (long(this->raw_bit) * long(fixed.raw_bit)) >> Fixed::fraction;
 	return (res);
 }
 
@@ -77,14 +76,13 @@ Fixed	Fixed::operator/(Fixed const &fixed) const
 {
 	Fixed	res;
 
-	res.value = (long(this->value)
-		<< long(Fixed::fraction)) / fixed.value;
+	res.raw_bit = (long(this->raw_bit) << long(Fixed::fraction)) / fixed.raw_bit;
 	return (res);
 }
 
 Fixed	&Fixed::operator++(void)
 {
-	this->value++;
+	this->raw_bit++;
 	return (*this);
 }
 
@@ -92,13 +90,13 @@ Fixed	Fixed::operator++(int)
 {
 	Fixed	res(*this);
 
-	this->value++;
+	this->raw_bit++;
 	return (res);
 }
 
 Fixed	&Fixed::operator--(void)
 {
-	this->value--;
+	this->raw_bit--;
 	return (*this);
 }
 
@@ -106,38 +104,38 @@ Fixed	Fixed::operator--(int)
 {
 	Fixed	res(*this);
 
-	this->value--;
+	this->raw_bit--;
 	return (res);
 }
 
 bool	Fixed::operator>(Fixed const &fixed) const
 {
-	return (this->value > fixed.value);
+	return (this->raw_bit > fixed.raw_bit);
 }
 
 bool	Fixed::operator<(Fixed const &fixed) const
 {
-	return (this->value < fixed.value);
+	return (this->raw_bit < fixed.raw_bit);
 }
 
 bool	Fixed::operator>=(Fixed const &fixed) const
 {
-	return (this->value >= fixed.value);
+	return (this->raw_bit >= fixed.raw_bit);
 }
 
 bool	Fixed::operator<=(Fixed const &fixed) const
 {
-	return (this->value <= fixed.value);
+	return (this->raw_bit <= fixed.raw_bit);
 }
 
 bool	Fixed::operator==(Fixed const &fixed) const
 {
-	return (this->value == fixed.value);
+	return (this->raw_bit == fixed.raw_bit);
 }
 
 bool	Fixed::operator!=(Fixed const &fixed) const
 {
-	return (this->value != fixed.value);
+	return (this->raw_bit != fixed.raw_bit);
 }
 
 Fixed	&Fixed::min(Fixed &a, Fixed &b)
@@ -170,20 +168,20 @@ const Fixed	&Fixed::max(const Fixed &a, const Fixed &b)
 
 void	Fixed::setRawBits(int const fp_value)
 {
-	this->value = fp_value;
+	this->raw_bit = fp_value;
 }
 
 int	Fixed::getRawBits(void) const
 {
-	return (this->value);
+	return (this->raw_bit);
 }
 
 float	Fixed::toFloat(void) const
 {
-	return (float(this->value) / float(1 << Fixed::fraction));
+	return (float(this->raw_bit) / float(1 << Fixed::fraction));
 }
 
 int	Fixed::toInt(void) const
 {
-	return (this->value >> Fixed::fraction);
+	return (this->raw_bit >> Fixed::fraction);
 }

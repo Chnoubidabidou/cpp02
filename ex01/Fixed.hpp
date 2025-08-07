@@ -6,7 +6,7 @@
 /*   By: lgrisel <lgrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 10:52:12 by lgrisel           #+#    #+#             */
-/*   Updated: 2025/08/05 12:08:59 by lgrisel          ###   ########.fr       */
+/*   Updated: 2025/08/07 11:46:15 by lgrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ class Fixed
 {
 	
 	private:
-		int					value;
+		int					raw_bit;
 		static const int	fraction = 8;
 
 	public:
 		Fixed();
-		Fixed(const int value);
-		Fixed(const float value);
+		Fixed(const int raw_bit);
+		Fixed(const float raw_bit);
 		Fixed(const Fixed &copy);
 		~Fixed();
 
@@ -36,4 +36,4 @@ class Fixed
 		int		toInt(void) const;
 };
 
-std::ostream	&operator<<(std::ostream &str, Fixed const &fixed_nbr);
+std::ostream	&operator<<(std::ostream &stream, Fixed const &fixed_nbr);
