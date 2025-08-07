@@ -6,7 +6,7 @@
 /*   By: lgrisel <lgrisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 10:52:10 by lgrisel           #+#    #+#             */
-/*   Updated: 2025/08/05 12:20:15 by lgrisel          ###   ########.fr       */
+/*   Updated: 2025/08/07 11:27:30 by lgrisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,11 @@ int	Fixed::toInt(void) const
 	return (this->value >> Fixed::fraction);
 }
 
-Fixed	&Fixed::operator=(Fixed const &copy)
+Fixed	&Fixed::operator=(Fixed const &src)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
-	this->value = copy.getRawBits();
+	if (this != &src)
+		this->value = src.getRawBits();
 	return (*this);
 }
 
